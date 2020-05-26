@@ -17,7 +17,7 @@ import com.example.administrator.myapplication.R;
 public class CommunicateFragment extends Fragment {
 
     private TextView tv_top;
-    private ImageView img_right_top;
+    private ImageView img_right_top,img_left_top;
 
 
     public CommunicateFragment() {
@@ -29,7 +29,9 @@ public class CommunicateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_communicate, container, false);
+        View view =inflater.inflate(R.layout.fragment_communicate, container, false);
+        initView(view);
+        return view;
     }
 
     @Override
@@ -38,6 +40,12 @@ public class CommunicateFragment extends Fragment {
     }
     //初始化view
     private void initView(View view){
+        tv_top = (TextView)view.findViewById(R.id.top_moudle);
+        img_left_top = (ImageView)view.findViewById(R.id.top_cancel);
+        img_right_top = (ImageView)view.findViewById(R.id.top_right);
+        tv_top.setText("通话");
+        img_right_top.setBackgroundResource(R.drawable.call_jilu);
+        img_left_top.setBackgroundResource(R.drawable.cancel);
 
     }
 }

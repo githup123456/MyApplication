@@ -105,8 +105,8 @@ public class MenuActivity extends AppCompatActivity {
     private void initData() {
         fragment_list.add(new CommunicateFragment());
         fragment_list.add(new languageFragment());
-        fragment_list.add(new MessageFragment());
         fragment_list.add(new ModeFragment());
+        fragment_list.add(new MessageFragment());
         fragment_list.add(new MyFragment());
     }
 
