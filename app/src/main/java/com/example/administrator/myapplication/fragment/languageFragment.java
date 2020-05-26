@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
@@ -14,9 +15,10 @@ import com.example.administrator.myapplication.R;
  */
 public class languageFragment extends Fragment {
     private TextView top_moudle;
-
+    private ImageView top_right;
     public languageFragment() {
         // Required empty public constructor
+
     }
 
 
@@ -24,6 +26,14 @@ public class languageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_language, container, false);
+        View view = inflater.inflate(R.layout.fragment_language, container, false);
+        initView(view);
+        return view;
+    }
+    private void initView(View view){
+        top_moudle = (TextView)view.findViewById(R.id.top_moudle);
+        top_moudle.setText("语音留言");
+        top_right = (ImageView) view.findViewById(R.id.top_right);
+        top_right.setBackgroundResource(R.drawable.call_jilu);
     }
 }

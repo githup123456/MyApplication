@@ -62,7 +62,7 @@
                 android:id="@+id/phone_at_tv_color"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/yuan_status"
                 android:layout_marginLeft="146dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="5dp"
