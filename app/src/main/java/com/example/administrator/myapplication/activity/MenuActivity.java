@@ -17,6 +17,7 @@ import com.example.administrator.myapplication.fragment.CommunicateFragment;
 import com.example.administrator.myapplication.fragment.MessageFragment;
 import com.example.administrator.myapplication.fragment.ModeFragment;
 import com.example.administrator.myapplication.fragment.MyFragment;
+import com.example.administrator.myapplication.fragment.PhoneCallFragment;
 import com.example.administrator.myapplication.fragment.languageFragment;
 
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
     private void initData() {
-        fragment_list.add(new CommunicateFragment());
+        fragment_list.add(new PhoneCallFragment());
         fragment_list.add(new languageFragment());
         fragment_list.add(new ModeFragment());
         fragment_list.add(new MessageFragment());
