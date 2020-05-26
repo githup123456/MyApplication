@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="username :"
+            
             android:textColor="@android:color/black"
             android:textSize="20dp" />
 
@@ -93,6 +94,7 @@
         android:layout_below="@+id/ll3"
         android:background="@android:color/holo_blue_light"
         android:text="注册"
+
         android:textColor="@android:color/black"
         android:textSize="25dp" />
 
