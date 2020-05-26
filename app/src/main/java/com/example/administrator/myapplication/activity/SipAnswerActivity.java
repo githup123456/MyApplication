@@ -1,4 +1,4 @@
-package com.example.administrator.myapplication;
+package com.example.administrator.myapplication.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.administrator.myapplication.R;
 
 
 public class SipAnswerActivity extends Activity {

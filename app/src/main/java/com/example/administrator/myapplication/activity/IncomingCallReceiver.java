@@ -1,4 +1,4 @@
-package com.example.administrator.myapplication;
+package com.example.administrator.myapplication.activity;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
