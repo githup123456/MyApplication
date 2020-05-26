@@ -24,8 +24,8 @@
             android:background="@drawable/shape_call"
             android:layout_centerHorizontal="true">
             <Button
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="15.5dp"
+                android:layout_height="15dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/add"
@@ -50,14 +50,14 @@
             <TextView
                 android:id="@+id/phone_at_tv_status"
                 android:layout_width="wrap_content"
-                android:layout_height="12dp"
+                android:layout_height="10dp"
                 android:hint="在线"
                 android:layout_marginLeft="168dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:layout_below="@+id/phone_at_tv_name"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="9dp"/>
+                android:textSize="8dp"/>
             <TextView
                 android:id="@+id/phone_at_tv_color"
                 android:layout_width="12dp"
@@ -67,6 +67,15 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/phone_at_tv_name"/>
+            <TextView
+                android:layout_width="108dp"
+                android:layout_height="11dp"
+                android:text="搜索昵称或者聊天记录"
+                android:textColor="#ff000000"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/phone_at_tv_color"/>
             <Button
                 android:id="@+id/phone_at_btn_yuyin"
                 android:layout_width="56.5dp"
