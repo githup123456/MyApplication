@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.adpter.MyFragmentPagerAdapter;
+import com.example.administrator.myapplication.fragment.CallPhoneFragment;
 import com.example.administrator.myapplication.fragment.CommunicateFragment;
 import com.example.administrator.myapplication.fragment.MessageFragment;
 import com.example.administrator.myapplication.fragment.ModeFragment;
@@ -108,6 +109,7 @@ public class MenuActivity extends AppCompatActivity {
         fragment_list.add(new ModeFragment());
         fragment_list.add(new MessageFragment());
         fragment_list.add(new MyFragment());
+        fragment_list.add(new CallPhoneFragment());
     }
 
     private void initView() {
