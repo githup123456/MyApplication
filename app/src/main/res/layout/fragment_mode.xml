@@ -13,18 +13,18 @@
 
         <Button
             android:id="@+id/bw_btn_problem"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
             android:background="@drawable/problem"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginRight="16.5dp"
+            android:layout_marginTop="16.5dp"
             android:layout_alignParentRight="true"/>
         <LinearLayout
             android:id="@+id/bw_lly_black_list"
             android:layout_width="124dp"
             android:layout_height="72dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="52dp"
+            android:layout_marginLeft="42dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/circle_y"
             android:gravity="center"
@@ -39,7 +39,7 @@
                 android:layout_height="16dp"
                 android:gravity="center"
                 android:text="黑名单模式"
-                android:textSize="14dp"
+                android:textSize="13dp"
                 android:textColor="@android:color/black" />
         </LinearLayout>
         <LinearLayout
@@ -50,7 +50,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="32dp"
-            android:layout_marginRight="52dp"
+            android:layout_marginRight="42dp"
             android:background="@drawable/cirle_j"
             android:orientation="vertical">
             <ImageView
