@@ -1,5 +1,6 @@
 package com.example.administrator.myapplication.fragment;
 
+import android.media.AudioManager;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.View;
@@ -10,6 +11,7 @@ import org.jivesoftware.smackx.workgroup.packet.MonitorPacket;
 
 //消息
 public class MessageFragment extends Fragment {
+
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         return super.onCreateAnimation(transit, enter, nextAnim);
