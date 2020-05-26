@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -44,6 +45,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void initListener() {
+        //RadioGroup的点击事件
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -62,6 +64,33 @@ public class MenuActivity extends AppCompatActivity {
                 if(btn_my.getId()==checkedId){
                     fist_viewPager.setCurrentItem(3);
                 }
+            }
+        });
+
+        //viewPager的点击事件
+        fist_viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+            @Override
+            public void onPageSelected(int i) {
+                if(i==0){
+                    btn_commuite.setChecked(true);
+                }else  if(i==1){
+                    btn_lanuage.setChecked(true);
+                }else  if(i==2){
+                    btn_mode.setChecked(true);
+                }else  if(i==3){
+                    btn_message.setChecked(true);
+                }else if(i==4){
+                    btn_my.setChecked(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
             }
         });
     }
