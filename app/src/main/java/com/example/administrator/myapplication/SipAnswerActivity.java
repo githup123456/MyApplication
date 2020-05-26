@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -22,7 +23,6 @@ public class SipAnswerActivity extends Activity {
         ed_username = (EditText)findViewById(R.id.sip_ed_username);
         ed_password = (EditText)findViewById(R.id.sip_ed_password);
         ed_domain   = (EditText)findViewById(R.id.sip_ed_domain);
-
         SharedPreferences shared = getSharedPreferences("sip_inmation", Context.MODE_PRIVATE);
         if(shared.getString("namePref","")!=null){
             ed_username.setText(shared.getString("namePref",""));

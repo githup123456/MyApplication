@@ -29,5 +29,9 @@ dependencies {
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation files('libs/linphone-sdk-android-4.4.0-beta.11+6ab4611-sources.jar')
+    //noinspection GradleCompatible
     implementation 'com.android.support:support-compat:28.0.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation files('libs/asmack-android-6.jar')
 }
