@@ -1,4 +1,4 @@
-package com.example.administrator.myapplication;
+package com.example.administrator.myapplication.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.example.administrator.myapplication.R;
+import com.example.administrator.myapplication.activity.MainActivity;
 
 import java.io.Serializable;
 import java.util.logging.Logger;

@@ -1,4 +1,4 @@
-package com.example.administrator.myapplication;
+package com.example.administrator.myapplication.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -14,18 +14,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.net.ParseException;
-import android.net.nsd.NsdManager;
-import android.net.nsd.NsdServiceInfo;
 import android.net.sip.SipAudioCall;
 import android.net.sip.SipException;
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
-import android.net.sip.SipSession;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -41,7 +36,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 
-import java.util.concurrent.Callable;
+import com.example.administrator.myapplication.R;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -222,24 +217,6 @@ public class MainActivity extends Activity {
             sipManager.setRegistrationListener(sipProfile.getUriString(),registrationListener);
             createProxyConfigAndLeaveAssistant(true);
             Log.d("SipMainActivity12", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
-           /* sipManager.setRegistrationListener(sipProfile.getUriString(), new SipRegistrationListener() {
-                @Override
-                public void onRegistering(String localProfileUri) {
-                    Log.d("SipMainActivity123", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
-                    updateStatus(STATE_CONNECTING);
-                }
-
-                @Override
-                public void onRegistrationDone(String localProfileUri, long expiryTime) {
-                    updateStatus(STATE_CONNECTED);
-                }
-
-                @Override
-                public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
-                    Log.d("SipMainActivity_log",";"+localProfileUri+"; ; ;"+errorCode+";  ;"+errorMessage);
-                    updateStatus(STATE_CONNECTED_FAILURE);
-                }
-            });*/
         } catch (ParseException pe) {
             updateStatus("Connection Error.1");
             Log.d("SipMainActivity+erro",""+pe);
