@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
 
@@ -12,6 +13,7 @@ import com.example.administrator.myapplication.R;
  * A simple {@link Fragment} subclass.
  */
 public class languageFragment extends Fragment {
+    private TextView top_moudle;
 
     public languageFragment() {
         // Required empty public constructor
