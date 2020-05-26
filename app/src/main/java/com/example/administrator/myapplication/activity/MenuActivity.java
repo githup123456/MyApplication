@@ -62,7 +62,7 @@ public class MenuActivity extends AppCompatActivity {
                     fist_viewPager.setCurrentItem(3);
                 }
                 if(btn_my.getId()==checkedId){
-                    fist_viewPager.setCurrentItem(3);
+                    fist_viewPager.setCurrentItem(4);
                 }
             }
         });

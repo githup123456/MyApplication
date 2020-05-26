@@ -15,7 +15,7 @@
             android:layout_below="@+id/phone_at_rel_top"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/darker_gray"/>
         <RelativeLayout
             android:id="@+id/phone_at_lly_information"
             android:layout_width="333dp"
