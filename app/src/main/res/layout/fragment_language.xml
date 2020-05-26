@@ -6,9 +6,31 @@
     tools:context=".fragment.languageFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <include layout="@layout/toolbar" android:id="@+id/phone_fg_rel_top"/>
+        <TextView
+            android:layout_below="@+id/phone_fg_rel_top"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"/>
+        <EditText
+            android:id="@+id/phone_call_ed_phone_number"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:inputType="number"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ciecle_y_ju"/>
+        <Button
+            android:id="@+id/phone_fg_btn_select"
+            android:layout_below="@+id/phone_call_ed_phone_number"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="37dp"/>
+    </RelativeLayout>
+
 
 </FrameLayout>

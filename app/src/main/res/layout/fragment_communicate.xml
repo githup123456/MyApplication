@@ -6,9 +6,83 @@
     tools:context=".fragment.CommunicateFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <include android:id="@+id/phone_at_rel_top"  layout="@layout/toolbar"/>
 
+        <TextView
+            android:layout_below="@+id/phone_at_rel_top"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <RelativeLayout
+            android:id="@+id/phone_at_lly_information"
+            android:layout_width="333dp"
+            android:layout_height="313dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/shape_call"
+            android:layout_centerHorizontal="true">
+            <Button
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/add"
+                android:layout_marginRight="10dp"/>
+            <ImageView
+                android:id="@+id/phone_at_touxiang_img"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/circle_head"
+                android:layout_marginTop="51dp" />
+            <TextView
+                android:id="@+id/phone_at_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:hint="派派"
+                android:layout_below="@+id/phone_at_touxiang_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"/>
+            <TextView
+                android:id="@+id/phone_at_tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:hint="在线"
+                android:layout_marginLeft="168dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/phone_at_tv_name"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="9dp"/>
+            <TextView
+                android:id="@+id/phone_at_tv_color"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@android:color/holo_green_light"
+                android:layout_marginLeft="146dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/phone_at_tv_name"/>
+            <Button
+                android:id="@+id/phone_at_btn_yuyin"
+                android:layout_width="56.5dp"
+                android:layout_height="56.5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="45dp"
+                android:layout_marginLeft="72.5dp"/>
+            <Button
+                android:id="@+id/phone_at_btn_shipin"
+                android:layout_width="56.5dp"
+                android:layout_height="56.5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="45dp"
+                android:layout_marginRight="72.5dp"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
 </FrameLayout>
