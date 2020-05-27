@@ -6,18 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.adpter.MyFragmentPagerAdapter;
-import com.example.administrator.myapplication.fragment.CallPhoneFragment;
 import com.example.administrator.myapplication.fragment.CommunicateFragment;
 import com.example.administrator.myapplication.fragment.MessageFragment;
 import com.example.administrator.myapplication.fragment.ModeFragment;
 import com.example.administrator.myapplication.fragment.MyFragment;
-import com.example.administrator.myapplication.fragment.PhoneCallFragment;
 import com.example.administrator.myapplication.fragment.languageFragment;
 
 import java.util.ArrayList;
@@ -52,12 +52,15 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(btn_commuite.getId()==checkedId){
+                    Log.d("MenuActivity1","msg1");
                     fist_viewPager.setCurrentItem(0);
                 }
                 if(btn_lanuage.getId()==checkedId){
+                    Log.d("MenuActivity1","msg2");
                     fist_viewPager.setCurrentItem(1);
                 }
                 if(btn_mode.getId()==checkedId){
+                    Log.d("MenuActivity1","msg3");
                     fist_viewPager.setCurrentItem(2);
                 }
                 if(btn_message.getId()==checkedId){
@@ -78,11 +81,14 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 if(i==0){
+                    Log.d("MenuActivity1","msg4");
                     btn_commuite.setChecked(true);
                 }else  if(i==1){
                     btn_lanuage.setChecked(true);
+                    Log.d("MenuActivity1","msg5");
                 }else  if(i==2){
                     btn_mode.setChecked(true);
+                    Log.d("MenuActivity1","msg6");
                 }else  if(i==3){
                     btn_message.setChecked(true);
                 }else if(i==4){
@@ -97,7 +103,7 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-    public  void   initAdapter() {
+    public  void  initAdapter() {
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),fragment_list);
         fist_viewPager.setAdapter(myFragmentPagerAdapter);
     }

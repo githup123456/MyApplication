@@ -18,10 +18,38 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/phone_fg_rel_top"
+            android:layout_marginTop="2dp">
+
+            <EditText
+                android:id="@+id/phone_call_ed_phone_number"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@drawable/ciecle_y_ju"
+                android:gravity="center"
+                android:hint="请输入手机号"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:textSize="17dp" />
+
+            <Button
+                android:id="@+id/phone_fg_btn_select"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/phone_call_ed_phone_number"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="37dp" />
+        </RelativeLayout>
+        <RelativeLayout
             android:id="@+id/phone_at_lly_information"
             android:layout_width="333dp"
             android:layout_height="313dp"
             android:layout_marginTop="100dp"
+            android:visibility="gone"
             android:background="@drawable/shape_call"
             android:layout_centerHorizontal="true">
             <Button
