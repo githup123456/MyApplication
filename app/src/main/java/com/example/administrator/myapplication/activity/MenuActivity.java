@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -48,15 +49,12 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(btn_commuite.getId()==checkedId){
-                    Log.d("MenuActivity1","msg1");
                     fist_viewPager.setCurrentItem(0);
                 }
                 if(btn_lanuage.getId()==checkedId){
-                    Log.d("MenuActivity1","msg2");
                     fist_viewPager.setCurrentItem(1);
                 }
                 if(btn_mode.getId()==checkedId){
-                    Log.d("MenuActivity1","msg3");
                     fist_viewPager.setCurrentItem(2);
                 }
                 if(btn_message.getId()==checkedId){
@@ -77,14 +75,11 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 if(i==0){
-                    Log.d("MenuActivity1","msg4");
                     btn_commuite.setChecked(true);
                 }else  if(i==1){
                     btn_lanuage.setChecked(true);
-                    Log.d("MenuActivity1","msg5");
                 }else  if(i==2){
                     btn_mode.setChecked(true);
-                    Log.d("MenuActivity1","msg6");
                 }else  if(i==3){
                     btn_message.setChecked(true);
                 }else if(i==4){
@@ -112,7 +107,6 @@ public class MenuActivity extends AppCompatActivity {
         fragment_list.add(new ModeFragment());
         fragment_list.add(new MessageFragment());
         fragment_list.add(new MyFragment());
-        fragment_list.add(new CallPhoneFragment());
     }
 
     private void initView() {

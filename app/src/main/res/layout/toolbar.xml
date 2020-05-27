@@ -30,7 +30,7 @@
         <ImageView
             android:id="@+id/top_right"
             android:layout_width="20dp"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="17dp"

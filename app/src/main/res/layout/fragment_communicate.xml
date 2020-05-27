@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.CommunicateFragment">
 
     <include layout="@layout/toolbar" android:id="@+id/phone_fg_rel_top"/>
-    <!--//打开页面，点击按钮显示通话界面-->
+
     <RelativeLayout
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/phone_fg_rel_top">
-
+        android:layout_below="@+id/phone_fg_rel_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"/>
         <EditText
             android:id="@+id/phone_call_ed_phone_number"
             android:layout_width="300dp"
@@ -33,94 +41,114 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="37dp"/>
     </RelativeLayout>
-
-    <!--通话视频界面-->
-    <RelativeLayout
-        android:layout_height="313dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/video_layout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33.5dp"
         android:layout_marginLeft="21dp"
         android:layout_marginRight="21dp"
-        android:id="@+id/video_layout"
-        android:background="@drawable/shape_call"
-        android:layout_marginTop="33.5dp"
         android:visibility="gone"
-        android:layout_below="@+id/phone_fg_rel_top">
-
-        <Button
-            android:layout_height="15dp"
-            android:layout_width="15.5dp"
-            android:background="@drawable/add"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"/>
+        android:background="@drawable/shape_call"
+        app:layout_constraintTop_toBottomOf="@id/phone_fg_rel_top">
 
         <ImageView
-            android:layout_height="75dp"
+            android:id="@+id/video_add"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/add"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12.5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--头像-->
+        <ImageView
+            android:id="@+id/video_avatar"
             android:layout_width="75dp"
-            android:id="@+id/phone_at_touxiang_img"
-            android:background="@drawable/circle_head"
+            android:layout_height="75dp"
+            android:src="@drawable/circle_head"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="51dp"
-            android:layout_centerHorizontal="true"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:layout_height="20dp"
+            android:id="@+id/avatar_name"
+            android:text="派派"
+            android:textColor="#000000"
+            android:textSize="17sp"
             android:layout_width="wrap_content"
-            android:id="@+id/phone_at_tv_name"
-            android:layout_below="@+id/phone_at_touxiang_img"
-            android:layout_marginTop="15dp"
-            android:textSize="17dp"
-            android:textColor="@android:color/black"
-            android:hint="派派"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/video_avatar"/>
 
-        <TextView
-            android:layout_height="10dp"
-            android:layout_width="wrap_content"
-            android:id="@+id/phone_at_tv_status"
-            android:layout_below="@+id/phone_at_tv_name"
-            android:layout_marginTop="5dp"
-            android:textSize="8dp"
-            android:textColor="@android:color/darker_gray"
-            android:hint="在线"
-            android:gravity="center"
-            android:layout_marginLeft="168dp"/>
+            <ImageView
+                android:id="@+id/on_line_btn"
+                android:src="@drawable/yuan_status"
+                android:layout_width="6.5dp"
+                android:layout_height="6.5dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_marginLeft="4dp"
+                app:layout_constraintLeft_toLeftOf="@id/avatar_name"
+                app:layout_constraintTop_toBottomOf="@id/avatar_name"/>
 
-        <TextView
-            android:layout_height="12dp"
-            android:layout_width="12dp"
-            android:id="@+id/phone_at_tv_color"
-            android:background="@drawable/yuan_status"
-            android:layout_below="@+id/phone_at_tv_name"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="146dp"/>
+            <TextView
+                android:id="@+id/text_status"
+                android:text="在线"
+                android:textSize="8sp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0.5dp"
+                app:layout_constraintTop_toBottomOf="@id/avatar_name"
+                app:layout_constraintLeft_toRightOf="@id/on_line_btn"/>
 
-        <TextView
-            android:layout_height="11dp"
-            android:layout_width="108dp"
-            android:layout_below="@+id/phone_at_tv_color"
+
+        <EditText
+            android:background="@null"
+            android:id="@+id/search_avatar_name"
+            android:textColor="#000000"
             android:textSize="10sp"
-            android:textColor="#ff000000"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:text="搜索昵称或者聊天记录"/>
+            android:hint="搜索昵称或者聊天记录"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_status"/>
 
-        <Button
-            android:layout_height="56.5dp"
-            android:layout_width="56.5dp"
-            android:id="@+id/phone_at_btn_yuyin"
+        <RelativeLayout
+            android:id="@+id/call_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="72.5dp"
-            android:layout_marginBottom="45dp"
-            android:layout_alignParentBottom="true"/>
-
-        <Button
-            android:layout_height="56.5dp"
-            android:layout_width="56.5dp"
-            android:id="@+id/phone_at_btn_shipin"
             android:layout_marginRight="72.5dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="45dp"
-            android:layout_alignParentBottom="true"/>
+            app:layout_constraintTop_toBottomOf="@+id/search_avatar_name">
+            <ImageView
+                android:layout_width="56.5dp"
+                android:layout_height="56.5dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/call_back"
+                android:layout_alignParentLeft="true"/>
 
-    </RelativeLayout>
-</RelativeLayout>
+            <ImageView
+                android:layout_width="56.5dp"
+                android:layout_height="56.5dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/call_back"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+        <View
+            android:layout_width="10dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="46dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/call_layout"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

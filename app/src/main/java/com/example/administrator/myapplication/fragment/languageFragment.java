@@ -15,12 +15,6 @@ import com.example.administrator.myapplication.R;
  */
 public class languageFragment extends Fragment {
     private TextView top_moudle;
-    private ImageView top_right;
-    public languageFragment() {
-        // Required empty public constructor
-
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +27,5 @@ public class languageFragment extends Fragment {
     private void initView(View view){
         top_moudle = (TextView)view.findViewById(R.id.top_moudle);
         top_moudle.setText("语音留言");
-        top_right = (ImageView) view.findViewById(R.id.top_right);
-        top_right.setBackgroundResource(R.drawable.call_jilu);
     }
 }
