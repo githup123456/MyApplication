@@ -1,14 +1,10 @@
 package com.example.administrator.myapplication.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -116,6 +112,7 @@ public class MenuActivity extends AppCompatActivity {
         fragment_list.add(new ModeFragment());
         fragment_list.add(new MessageFragment());
         fragment_list.add(new MyFragment());
+        fragment_list.add(new CallPhoneFragment());
     }
 
     private void initView() {
