@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.administrator.myapplication" >
+    package="com.example.administrator.myapplication">
 
     <uses-permission android:name="android.permission.USE_SIP" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,10 +36,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-        <activity android:name=".activity.MainActivity" >
-
-        </activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activity.SendVoicePhoneActivity"></activity>
+        <activity android:name=".activity.AnswerCallActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SipAnswerActivity" />
         <activity android:name=".activity.SipCalllingActivity" />
         <activity android:name=".activity.MenuActivity">
@@ -52,7 +52,7 @@
 
         <receiver
             android:name=".activity.IncomingCallReceiver"
-            android:label="Call Receiver" >
+            android:label="Call Receiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
