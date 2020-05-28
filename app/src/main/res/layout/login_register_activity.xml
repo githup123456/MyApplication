@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/ic_sign"
+            android:layout_width="77.5dp"
+            android:layout_height="77.5dp"
+            android:layout_marginTop="170.5dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_sign" />
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/ic_sign"
+            android:gravity="center"
+            android:text="登录"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="37.5dp"
+            android:background="@drawable/login_border"
+            android:layout_marginRight="38dp"/>
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/login_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="37.5dp"
+            android:background="@drawable/register_border"
+            android:layout_marginRight="38dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="48.5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="登录代表您已阅读并同意"
+                android:textColor="#87878c"
+                android:textSize="12sp"/>
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="《用户协议》"
+                android:textColor="#2DB7CA"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="和"
+                android:textColor="#87878c"
+                android:textSize="12sp"/>
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="《隐私协议》"
+                android:textColor="#2CB9C8"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

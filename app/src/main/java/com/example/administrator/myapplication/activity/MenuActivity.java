@@ -6,11 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.adpter.MyFragmentPagerAdapter;
@@ -32,6 +38,8 @@ public class MenuActivity extends AppCompatActivity {
     private RadioButton btn_message;
     private RadioButton btn_my;
     private RadioGroup rg;
+    private AlertDialog.Builder builder;
+    private AlertDialog alertDialog;
     //数据
     private ArrayList<Fragment> fragment_list=new ArrayList<>();
     //适配器
@@ -55,6 +63,44 @@ public class MenuActivity extends AppCompatActivity {
         initAdapter();  //添加适配器
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fist_viewPager.setCurrentItem(2);
+        btn_mode.setChecked(true);
+        setDialog();
+    }
+
+    //显示对话框
+    private void setDialog(){
+        LayoutInflater inflater = LayoutInflater.from(MenuActivity.this);
+        View view = inflater.inflate(R.layout.home_dialog,null);
+        Button button = (Button) view.findViewById(R.id.dialog_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (alertDialog!=null){
+                    alertDialog.cancel();
+                    alertDialog.dismiss();//对话框关闭
+                }
+            }
+        });
+        showDialog(view);
+
+    }
+    //建立对话框
+    public void showDialog(View view){
+        builder = new AlertDialog.Builder(MenuActivity.this);
+        alertDialog = builder.create();
+        alertDialog.setView(view);
+        alertDialog.show();
+        WindowManager m = getWindowManager();
+        Display d = m.getDefaultDisplay();  //为获取屏幕宽、高
+        android.view.WindowManager.LayoutParams p = alertDialog.getWindow().getAttributes();  //获取对话框当前的参数值
+        p.height = (int) (d.getHeight() * 0.6);   //高度设置为屏幕的0.3
+        p.width = (int) (d.getWidth() * 0.8);    //宽度设置为屏幕的0.5
+        alertDialog.getWindow().setAttributes(p);     //设置生效
+    }
     private void initListener() {
         //RadioGroup的点击事件
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -110,7 +156,6 @@ public class MenuActivity extends AppCompatActivity {
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),fragment_list);
         fist_viewPager.setAdapter(myFragmentPagerAdapter);
     }
-
 
 
     private void initData() {
