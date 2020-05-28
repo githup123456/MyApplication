@@ -1,12 +1,11 @@
 package com.example.administrator.myapplication.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -62,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
                     fist_viewPager.setCurrentItem(3);
                 }
                 if(btn_my.getId()==checkedId){
-                    fist_viewPager.setCurrentItem(3);
+                    fist_viewPager.setCurrentItem(4);
                 }
             }
         });
@@ -95,7 +94,7 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-    public  void   initAdapter() {
+    public  void  initAdapter() {
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),fragment_list);
         fist_viewPager.setAdapter(myFragmentPagerAdapter);
     }
@@ -105,8 +104,8 @@ public class MenuActivity extends AppCompatActivity {
     private void initData() {
         fragment_list.add(new CommunicateFragment());
         fragment_list.add(new languageFragment());
-        fragment_list.add(new MessageFragment());
         fragment_list.add(new ModeFragment());
+        fragment_list.add(new MessageFragment());
         fragment_list.add(new MyFragment());
     }
 
