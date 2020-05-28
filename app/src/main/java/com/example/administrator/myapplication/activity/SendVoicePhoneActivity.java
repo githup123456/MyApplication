@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import com.example.administrator.myapplication.R;
 
+/**
+ * 实现发送语音电话功能
+ */
 public class SendVoicePhoneActivity extends AppCompatActivity {
 
     @Override

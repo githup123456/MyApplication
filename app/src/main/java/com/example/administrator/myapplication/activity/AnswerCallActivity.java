@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.example.administrator.myapplication.R;
 
 /**
- * 接听界面
+ * 接听界面，实现电话功能
  */
 public class AnswerCallActivity extends AppCompatActivity {
 
