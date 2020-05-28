@@ -42,14 +42,16 @@ import com.example.administrator.myapplication.R;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class MainActivity extends Activity {
-    public SipManager sipManager;
-    private String sipAddress = null;
-    public SipAudioCall sipAudioCall;
-    public SipProfile sipProfile;
+    public static SipManager sipManager;
+    private static String sipAddress = null;
+    public static SipAudioCall sipAudioCall;
+    public static SipProfile sipProfile;
 
     private static final String[] VIDEO_PERMISSIONS = {Manifest.permission.USE_SIP,Manifest.permission.RECORD_AUDIO,Manifest.permission_group.PHONE};
     private IncomingCallReceiver incomingCallReceiver;
-    private String userName, passWord, domain;
+    private static String userName;
+    private String passWord;
+    private String domain;
     public static final String STATE_CONNECTED = "Connected";
     public static final String STATE_CONNECTED_FAILURE = "Register failed, try to refresh";
     public static final String STATE_CONNECTING = "Connecting...";
@@ -144,7 +146,7 @@ public class MainActivity extends Activity {
         initializeManager();
     }
 
-    public void initializeManager() {
+    public  void initializeManager() {
         if (sipManager == null) {
             Log.d("", "sipManager.toString()");
             sipManager = SipManager.newInstance(getApplicationContext());
@@ -159,7 +161,7 @@ public class MainActivity extends Activity {
             return;
         }
         if (sipProfile != null) {
-            closeLocalProfile();
+            closeLocalProfile(sipManager,sipProfile);
         }
         Log.d("SipMainActivity126", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
         SharedPreferences sharedPreferences = this.getSharedPreferences("sip_inmation",Context.MODE_PRIVATE);
@@ -167,16 +169,26 @@ public class MainActivity extends Activity {
         domain = sharedPreferences.getString("domainPref", "");
         passWord = sharedPreferences.getString("passPref", "");
         Log.d("SipMainActivity556", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
-        showZhuce();
+        showZhuce(MainActivity.this,sipProfile,userName,domain,passWord,sipManager);
     }
     public  SipAudioCall getSipcall(){
         return sipAudioCall;
     }
 
-    public void showZhuce() {
+    public static void showZhuce(Context context,SipProfile sipProfile,final String userName, final String domain, final String passWord,SipManager sipManager) {
+        if (sipManager==null){
+            sipManager = SipManager.newInstance(context);
+        }
+        if (sipManager==null){
+            return;
+        }
+        if (sipProfile!=null){
+            closeLocalProfile(sipManager,sipProfile);
+        }
+
         Log.d("SipMainActivity", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
         if (userName.length() == 0 && domain.length() == 0 && passWord.length() == 0) {
-            showDialog(Update_Setting_Dialog);
+            //showDialog(Update_Setting_Dialog);
             return;
         }
         try {
@@ -190,33 +202,26 @@ public class MainActivity extends Activity {
             Log.d("SipMainActivity2", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
             Intent i = new Intent();
             i.setAction("android.SipTest.INCOMING_CALL");
-            PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, Intent.FILL_IN_DATA);
-
+            PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, Intent.FILL_IN_DATA);
             SipRegistrationListener registrationListener = new SipRegistrationListener() {
                 @Override
                 public void onRegistering(String localProfileUri) {
                     Log.d("SipMainActivity123", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
-                    updateStatus(STATE_CONNECTING);
                 }
-
                 @Override
                 public void onRegistrationDone(String localProfileUri, long expiryTime) {
                     Log.d("SipMainActivity_log+",";"+localProfileUri+"; ; ;"+expiryTime+";  ;");
-                    updateStatus(STATE_CONNECTED);
                 }
-
                 @Override
                 public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
                     Log.d("SipMainActivity_log=",";"+localProfileUri+"; ; ;"+errorCode+";  ;"+errorMessage);
-                    updateStatus(STATE_CONNECTED_FAILURE);
                 }
             };
-            Log.d("SipMainActivity3", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
+            Log.d("SipMainActivity3", ""  + ";  ;" + domain + " ;  ;" + passWord);
             sipManager.open(sipProfile, pi, null);
-
-            sipManager.register(sipProfile,20,registrationListener);
+            //sipManager.register(sipProfile,20,registrationListener);
             sipManager.setRegistrationListener(sipProfile.getUriString(),registrationListener);
-            createProxyConfigAndLeaveAssistant(true);
+            //createProxyConfigAndLeaveAssistant(true);
             Log.d("SipMainActivity12", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
         } catch (ParseException pe) {
             updateStatus("Connection Error.1");
@@ -225,6 +230,7 @@ public class MainActivity extends Activity {
             Log.d("SipMainActivity+erro",""+se);
             updateStatus("Connection error.2");
         } catch (java.text.ParseException e) {
+            Log.d("SipMainActivity+erro3",""+e);
             e.printStackTrace();
         }
     }
@@ -280,7 +286,7 @@ public class MainActivity extends Activity {
                                         EditText textField = (EditText)
                                                 (view.findViewById(R.id.call_dialog_ed));
                                         sipAddress = textField.getText().toString();
-                                        initiateCall();
+                                        initiateCall(sipAddress,sipAudioCall,sipManager,sipProfile.getUriString());
                                     }
                                 })
                         .setNegativeButton(
@@ -300,9 +306,10 @@ public class MainActivity extends Activity {
                                         updatePreferences();
                                     }
                                 })
-                        .setNegativeButton(      //TODO 实现取消对话框
+                        .setNegativeButton(
                                 android.R.string.cancel, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
+                                        // Noop.
                                     }
                                 })
                         .create();
@@ -312,7 +319,7 @@ public class MainActivity extends Activity {
     }
 
     @SuppressLint("LongLogTag")
-    private void initiateCall() {
+    public static void initiateCall(String sipAddress,SipAudioCall sipAudioCall,SipManager sipManager,String url) {
         updateStatus(sipAddress);
         try {
             SipAudioCall.Listener listener = new SipAudioCall.Listener() {
@@ -322,50 +329,55 @@ public class MainActivity extends Activity {
                     call.startAudio();
                     call.setSpeakerMode(true);
                     call.toggleMute();
-                    updateStatus("call");
-
-
                 }
 
                 @Override
                 public void onCallEnded(SipAudioCall call) {
                     super.onCallEnded(call);
-                    updateStatus("Ready.");
+                    Log.d("TAG","Ready:");
+                    Log.d("SipMainActivity1", "ready");
                 }
 
                 @Override
                 public void onCalling(SipAudioCall call) {
                     if (!call.isMuted())
                         call.toggleMute();
-                    updateStatus(STATE_CALLING + " " + call.getPeerProfile().getUserName());
+                    Log.d("SipMainActivity1", "calling");
                 }
             };
-            sipAudioCall = sipManager.makeAudioCall(sipProfile.getUriString(), sipAddress, listener, 30);
+
+            Log.d("SipMainActivity1", "s "+sipAddress);
+            sipAudioCall = sipManager.makeAudioCall(url, sipAddress, listener, 30);
         } catch (Exception e) {
-            Log.i("MainActivity/InitiateCall", "Error when trying to close manager.", e);
+
+            Log.d("SipMainActivity1", "s "+e);
             if (sipProfile != null) {
                 try {
+                    Log.d("SipMainActivity1", "s "+sipAddress);
                     sipManager.close(sipProfile.getUriString());
                 } catch (Exception ee) {
-                    Log.i("MainActivity/InitiateCall",
-                            "Error when trying to close manager.", ee);
+
+                    Log.d("SipMainActivity1", "s "+sipAddress);
                     ee.printStackTrace();
                 }
             }
             if (sipAudioCall != null) {
+
+                Log.d("SipMainActivity1", "s "+sipAddress);
                 sipAudioCall.close();
             }
+
         }
     }
 
-    public void updateStatus(final String status) {
-        this.runOnUiThread(new Runnable() {
+    public static void updateStatus(final String status) {
+        /*this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView lable_textview = (TextView) findViewById(R.id.tv_label);
                 lable_textview.setText(status);
             }
-        });
+        });*/
     }
 
     public void updateStatus(SipAudioCall call) {
@@ -377,7 +389,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public void closeLocalProfile() {
+    public static void closeLocalProfile(SipManager sipManager, SipProfile sipProfile) {
         if (sipManager == null) {
             return;
         }
@@ -424,12 +436,12 @@ public class MainActivity extends Activity {
                 // service notification, otherwise incoming calls won't work (most probably)
 
                 Log.w(
-                       "sa", "[Assistant] Unknown domain used, push probably won't work, enable service mode");
+                        "sa", "[Assistant] Unknown domain used, push probably won't work, enable service mode");
             }
         }
 
 
-            goToLinphoneActivity();
+        goToLinphoneActivity();
 
     }
 
