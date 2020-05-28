@@ -1,11 +1,14 @@
 package com.example.administrator.myapplication.activity;
 
+import android.content.IntentFilter;
+import android.net.sip.SipManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 
 //  主 界 面
 public class MenuActivity extends AppCompatActivity {
+    public SipManager sipManager;
     private ViewPager fist_viewPager;
     private RadioButton btn_commuite;
     private RadioButton btn_lanuage;
@@ -33,10 +37,18 @@ public class MenuActivity extends AppCompatActivity {
     //适配器
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
 
+    public IncomingCallReceiver mReceiver;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_activity);
+        SipAnswerActivity sipAnswerActivity = new SipAnswerActivity();
+        sipManager = sipAnswerActivity.getSipManager();
+        //广播
+        IntentFilter intentFilter = new IntentFilter("android.SipTest.INCOMING_CALL");
+        mReceiver = new IncomingCallReceiver();
+        registerReceiver(mReceiver, intentFilter);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         initView(); //初始化
         initData(); //添加数据
         initListener(); //初始监听器

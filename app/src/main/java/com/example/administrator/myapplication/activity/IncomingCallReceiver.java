@@ -20,7 +20,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         SipAudioCall incomingCall = null;
         Log.d("TAGqw", "onReceive: 1");
-        final MainActivity mainActivity = (MainActivity) context;
+        final MenuActivity answerActivity = (MenuActivity) context;
         try {
             SipAudioCall.Listener listener = new SipAudioCall.Listener() {
                 @Override
@@ -38,27 +38,26 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                 public void onCalling(SipAudioCall call) {
                     super.onCalling(call);
                     Log.d("TAGqw", "onReceive: 1");
-                    mainActivity.updateStatus(MainActivity.STATE_CALLING + " " + call.getPeerProfile().getUserName());
+
                 }
 
                 @Override
                 public void onCallEnded(SipAudioCall call) {
                     super.onCallEnded(call);
                     Log.d("TAGqw", "onReceive: 1");
-                    mainActivity.updateStatus(MainActivity.STATE_CONNECTED);
                 }
             };
             Log.d("TAGqw", "onReceive: 1");
-            incomingCall = mainActivity.sipManager.takeAudioCall(intent, listener);
+            incomingCall = answerActivity.sipManager.takeAudioCall(intent, listener);
             showDialog(context,incomingCall);
-            initGetSipSession(context,mainActivity,intent);
+            initGetSipSession(context,answerActivity,intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private Handler handler = new Handler();
-    private void initGetSipSession(final Context context, MainActivity mainActivity, Intent intent) {
+    private void initGetSipSession(final Context context, MenuActivity mainActivity, Intent intent) {
         try {
             SipSession sessionFor =mainActivity.sipManager.getSessionFor(intent);
 
@@ -116,5 +115,6 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                 });
         builder.create().show();
     }
+
 
 }
