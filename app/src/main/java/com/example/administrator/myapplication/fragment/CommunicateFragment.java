@@ -1,5 +1,6 @@
 package com.example.administrator.myapplication.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -33,7 +34,6 @@ public class CommunicateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_communicate, container, false);
         initView(inflate);
         tv_top.setText("通话");
@@ -44,7 +44,7 @@ public class CommunicateFragment extends Fragment {
 
     //点击button切换通话
     private void initListener() {
-        //实现点击按钮切换通话界面    phone_fg_btn_select
+        //实现点击按钮切换通话界面
         phone_fg_btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class CommunicateFragment extends Fragment {
         });
     }
 
-    //初始化view
+    //todo 初始化view
     private void initView(View view){
         tv_top = view.findViewById(R.id.top_moudle);
         phone_fg_btn_select = view.findViewById(R.id.phone_fg_btn_select);

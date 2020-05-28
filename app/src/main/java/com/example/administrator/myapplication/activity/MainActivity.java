@@ -33,6 +33,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -299,10 +300,9 @@ public class MainActivity extends Activity {
                                         updatePreferences();
                                     }
                                 })
-                        .setNegativeButton(
+                        .setNegativeButton(      //TODO 实现取消对话框
                                 android.R.string.cancel, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
-                                        // Noop.
                                     }
                                 })
                         .create();
@@ -323,6 +323,8 @@ public class MainActivity extends Activity {
                     call.setSpeakerMode(true);
                     call.toggleMute();
                     updateStatus("call");
+
+
                 }
 
                 @Override
@@ -353,7 +355,6 @@ public class MainActivity extends Activity {
             if (sipAudioCall != null) {
                 sipAudioCall.close();
             }
-
         }
     }
 
