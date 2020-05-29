@@ -96,7 +96,7 @@ public class SipAnswerActivity extends Activity {
                 sipManager = SipManager.newInstance(getApplicationContext());
                 MainActivity.showZhuce(SipAnswerActivity.this,sipProfile,username,domain,password,sipManager);
                 Intent intent = new Intent(SipAnswerActivity.this,MenuActivity.class);
-                intent.putExtra("stringurl",username+"@"+domain);
+                intent.putExtra("string_url",username+"@"+domain);
                 startActivity(intent);
             }
         });

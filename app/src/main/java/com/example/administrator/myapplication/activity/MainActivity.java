@@ -286,7 +286,8 @@ public class MainActivity extends Activity {
                                         EditText textField = (EditText)
                                                 (view.findViewById(R.id.call_dialog_ed));
                                         sipAddress = textField.getText().toString();
-                                        initiateCall(sipAddress,sipAudioCall,sipManager,sipProfile.getUriString());
+                                        String status = null;
+                                        initiateCall(sipAddress,sipAudioCall,sipManager,sipProfile.getUriString(),status);
                                     }
                                 })
                         .setNegativeButton(
@@ -317,9 +318,8 @@ public class MainActivity extends Activity {
         }
         return null;
     }
-
     @SuppressLint("LongLogTag")
-    public static void initiateCall(String sipAddress,SipAudioCall sipAudioCall,SipManager sipManager,String url) {
+    public static void initiateCall(String sipAddress, SipAudioCall sipAudioCall, SipManager sipManager, String url, final String status) {
         updateStatus(sipAddress);
         try {
             SipAudioCall.Listener listener = new SipAudioCall.Listener() {
@@ -340,9 +340,10 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onCalling(SipAudioCall call) {
-                    if (!call.isMuted())
+                    super.onCalling(call);
+                    if (!call.isMuted()){
                         call.toggleMute();
-                    Log.d("SipMainActivity1", "calling");
+                    }
                 }
             };
 

@@ -61,14 +61,20 @@ public class MenuActivity extends AppCompatActivity {
         initData(); //添加数据
         initListener(); //初始监听器
         initAdapter();  //添加适配器
+        setDialog(); //提示对话框
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fist_viewPager.setCurrentItem(2);
+        btn_mode.setChecked(true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        fist_viewPager.setCurrentItem(2);
-        btn_mode.setChecked(true);
-        setDialog();
+
     }
 
     //显示对话框
@@ -86,8 +92,16 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
         showDialog(view);
-
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("", "黑名单服务关闭");
+        unregisterReceiver(mReceiver);
+        super.onDestroy();
+    }
+
     //建立对话框
     public void showDialog(View view){
         builder = new AlertDialog.Builder(MenuActivity.this);

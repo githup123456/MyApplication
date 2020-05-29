@@ -1,25 +1,39 @@
 package com.example.administrator.myapplication.fragment;
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.sip.SipAudioCall;
+import android.net.sip.SipManager;
+import android.net.sip.SipProfile;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
+import com.example.administrator.myapplication.Window.SendVoicePhoneWindow;
+import com.example.administrator.myapplication.activity.AnswerCallActivity;
+import com.example.administrator.myapplication.activity.MainActivity;
+import com.example.administrator.myapplication.activity.SendVoicePhoneActivity;
+import com.example.administrator.myapplication.activity.SipAnswerActivity;
 
 /**
  * 通话
  */
 public class CommunicateFragment extends Fragment {
 
+    private ImageView img_call_audio;
+    private EditText ed_ph_number;
     private TextView tv_top;
     Button  phone_fg_btn_select;
     RelativeLayout  search_layout;
@@ -63,6 +77,17 @@ public class CommunicateFragment extends Fragment {
                 top_cancel.setVisibility(View.GONE);
             }
         });
+        //语音的监听事件
+        img_call_audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phone_number = ed_ph_number.getText().toString();
+                Intent intent2 = getActivity().getIntent();
+                String url = intent2.getStringExtra("string_url");
+                SendVoicePhoneWindow sendVoicePhoneWindow = new SendVoicePhoneWindow(getActivity(),url,phone_number);
+                sendVoicePhoneWindow.showAtLocation(img_call_audio, Gravity.CENTER,0,0);
+            }
+        });
     }
 
     //todo 初始化view
@@ -72,5 +97,7 @@ public class CommunicateFragment extends Fragment {
         search_layout = view.findViewById(R.id.search_layout);
         video_layout = view.findViewById(R.id.video_layout);
         top_cancel  =  view.findViewById(R.id.top_cancel);
+        img_call_audio = (ImageView)view.findViewById(R.id.img_call_audio);
+        ed_ph_number = (EditText)view.findViewById(R.id.phone_number);
     }
 }
