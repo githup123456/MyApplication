@@ -183,6 +183,8 @@ public class WalkieTalkieActivity extends Activity {
     public void setSip_Profile(SipProfile sipProfile){
         this.sip_Profile = sipProfile;
     }
+
+
     public static SipProfile getSip_Profile(){
         return sip_Profile;
     }
