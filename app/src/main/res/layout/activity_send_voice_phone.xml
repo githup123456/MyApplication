@@ -90,10 +90,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#353535"
-        android:visibility="gone"
+
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
+        <Chronometer
             android:id="@+id/call_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -34,6 +34,7 @@ public class VoiceIncomingWindow extends ClassWindow implements View.OnClickList
 
     }
 
+
     //初始化控件
     private void initView(View view){
         constraintLayout_1 = (ConstraintLayout)view.findViewById(R.id.close_receiver);

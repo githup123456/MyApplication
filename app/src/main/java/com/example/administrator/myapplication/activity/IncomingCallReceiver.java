@@ -23,11 +23,19 @@ import android.widget.Toast;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.Window.VoiceIncomingWindow;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
+
+import static com.example.administrator.myapplication.activity.MainActivity.sipManager;
 
 public class IncomingCallReceiver extends BroadcastReceiver {
     public static SipAudioCall sipAudioCall;
     public String userID;
+    public Date  firstCallTime;//点击拨打电话的时间
+    public Date  endCallTime; //结束拨打电话的时间
+
     @Override
     public void onReceive(final Context context, Intent intent) {
         SipAudioCall incomingCall = null;
@@ -45,26 +53,28 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                         Log.d("TAGqw", "onReceive: 1");
                         userID = caller.getUserName();
                         call.answerCall(30);
+
                     } catch (SipException e) {
                         e.printStackTrace();
                     }
                 }
 
+                //TODO 通话中
                 @Override
                 public void onCalling(SipAudioCall call) {
                     super.onCalling(call);
-                    Log.d("TAGqw", "onReceive: 2");
-
                 }
 
+                //通话结束
                 @Override
                 public void onCallEnded(SipAudioCall call) {
                     super.onCallEnded(call);
                     Log.d("TAGqw", "onReceive: 3");
+
                 }
             };
 
-            incomingCall = answerActivity.sipManager.takeAudioCall(intent, listener);
+            incomingCall = sipManager.takeAudioCall(intent, listener);
             setSipAudioCall(incomingCall);
             setIntent(context,userID,incomingCall,view);
             //showDialog(context,incomingCall);
@@ -79,15 +89,16 @@ public class IncomingCallReceiver extends BroadcastReceiver {
         if (sipAudioCall == null)
         Log.d("SipManager",""+sipAudioCall);
     }
-    public VoiceIncomingWindow voiceIncomingWindow;
     //获取sipAudioCall
     public static SipAudioCall  getSipAudioCall(){
         return sipAudioCall;
     }
     private void setIntent(Context context,String userID,SipAudioCall sipAudioCall,View view){
-        voiceIncomingWindow = new VoiceIncomingWindow(context,userID,sipAudioCall);
+        VoiceIncomingWindow voiceIncomingWindow = new VoiceIncomingWindow(context,userID,sipAudioCall);
         voiceIncomingWindow.showAtLocation(view, Gravity.CENTER,0,0);
     }
+
+    //子线程实现接打电话
     private Handler handler = new Handler();
     private void initGetSipSession(final Context context, MenuActivity mainActivity, final Intent intent) {
         try {
@@ -103,9 +114,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            voiceIncomingWindow.dismiss();
                             Toast.makeText(context,"通话中断",Toast.LENGTH_SHORT).show();
-
                         }
                     });
                 }
@@ -119,7 +128,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
         final SipAudioCall sipAudioCall = call;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("New Call")
-                .setMessage("From " + sipAudioCall.getPeerProfile().getUserName())
+                .setMessage("From" + sipAudioCall.getPeerProfile().getUserName())
                 .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -146,8 +155,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                         }
                     }
                 });
+        //弹出对话框
         builder.create().show();
     }
-
-
 }

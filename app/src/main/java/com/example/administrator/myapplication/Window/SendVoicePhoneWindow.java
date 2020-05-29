@@ -10,12 +10,14 @@ import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class SendVoicePhoneWindow extends ClassWindow{
     public  SipAudioCall sipAudioCall;
     private ConstraintLayout constraintLayout_1,constraintLayout_2;
     private TextView tv_name;
+    Chronometer call_time;
     private ImageView img_hang_up, img_cancel_call;//挂断
     public SendVoicePhoneWindow(Context context, String url,String name) {
         super(context);
@@ -72,6 +75,10 @@ public class SendVoicePhoneWindow extends ClassWindow{
                 dismiss();
             }
         });
+
+        //call_time 初始化时间
+        call_time = view.findViewById(R.id.call_time);
+
         img_hang_up = (ImageView)view.findViewById(R.id.hang_up_btn);
         img_hang_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +118,10 @@ public class SendVoicePhoneWindow extends ClassWindow{
                         }
                     });
 
-
+                    //添加通话时间
+                    //计时器清零
+                    call_time.setBase(SystemClock.elapsedRealtime());
+                    call_time.start();
                 }
 
                 @Override
@@ -126,6 +136,8 @@ public class SendVoicePhoneWindow extends ClassWindow{
                         }
                     });
 
+                    //通话结束
+                    call_time.stop();
                 }
 
                 @Override
@@ -158,7 +170,6 @@ public class SendVoicePhoneWindow extends ClassWindow{
                 Log.d("SipMainActivity1", "s " + sipAddress);
                 sipAudioCall.close();
             }
-
         }
     }
 }
