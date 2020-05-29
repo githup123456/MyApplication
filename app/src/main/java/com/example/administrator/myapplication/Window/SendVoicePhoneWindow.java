@@ -8,6 +8,9 @@ import android.net.sip.SipAudioCall;
 import android.net.sip.SipException;
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,25 +18,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.myapplication.R;
-import com.example.administrator.myapplication.activity.AnswerCallActivity;
-import com.example.administrator.myapplication.activity.SendVoicePhoneActivity;
 import com.example.administrator.myapplication.activity.SipAnswerActivity;
 
+import java.util.logging.Logger;
+
 public class SendVoicePhoneWindow extends ClassWindow{
+    public SendVoicePhoneWindow sendVoicePhoneWindow;
     private View rootView;
     private Context context;
     private String name;
     private String local_url;
     public  SipAudioCall sipAudioCall;
+    private ConstraintLayout constraintLayout_1,constraintLayout_2;
     private TextView tv_name;
-    private ImageView img_hang_up;//挂断
+    private ImageView img_hang_up, img_cancel_call;//挂断
     public SendVoicePhoneWindow(Context context, String url,String name) {
         super(context);
         this.context = context;
         this.local_url = url;
         this.name =name;
+        sendVoicePhoneWindow = SendVoicePhoneWindow.this;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         rootView = inflater.inflate(R.layout.activity_send_voice_phone, null);
         this.setContentView(rootView);
@@ -48,9 +55,24 @@ public class SendVoicePhoneWindow extends ClassWindow{
     }
     //初始化控件
     private void initView(View view){
+        constraintLayout_1 = (ConstraintLayout)view.findViewById(R.id.close_cancel);
+        constraintLayout_2 = (ConstraintLayout)view.findViewById(R.id.answer_call);
         tv_name =(TextView)view.findViewById(R.id.send_name);
         tv_name.setText(name);
-        img_hang_up = (ImageView)view.findViewById(R.id.send_cancel_btn);
+        img_cancel_call = (ImageView)view.findViewById(R.id.send_cancel_btn);
+        img_cancel_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    sipAudioCall.endCall();
+                    sipAudioCall.close();
+                } catch (SipException e) {
+                    e.printStackTrace();
+                }
+                dismiss();
+            }
+        });
+        img_hang_up = (ImageView)view.findViewById(R.id.hang_up_btn);
         img_hang_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +89,7 @@ public class SendVoicePhoneWindow extends ClassWindow{
     private void setSipAudioCall(SipAudioCall sipAudioCall){
         this.sipAudioCall = sipAudioCall;
     }
+    private Handler handler = new Handler();
     //打电话
     public  void initiateCall(String sipAddress, SipAudioCall sipAudioCall, SipManager sipManager, String url) {
 
@@ -79,9 +102,16 @@ public class SendVoicePhoneWindow extends ClassWindow{
                     call.startAudio();
                     call.setSpeakerMode(true);
                     call.toggleMute();
-                    AnswerCallWindow answerCallWindow = new AnswerCallWindow(context,name,call);
-                    answerCallWindow.showAtLocation(rootView, Gravity.CENTER,0,0);
-                    dismiss();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Logger.getLogger("onCallEnded");
+                            constraintLayout_1.setVisibility(View.GONE);
+                            constraintLayout_2.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+
                 }
 
                 @Override
@@ -89,7 +119,13 @@ public class SendVoicePhoneWindow extends ClassWindow{
                     super.onCallEnded(call);
                     Log.d("TAG", "Ready:");
                     Log.d("SipMainActivity1", "ready");
-                    dismiss();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendVoicePhoneWindow.dismiss();
+                        }
+                    });
+
                 }
 
                 @Override

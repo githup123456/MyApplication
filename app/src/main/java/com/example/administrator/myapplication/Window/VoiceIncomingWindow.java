@@ -1,10 +1,9 @@
 package com.example.administrator.myapplication.Window;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.sip.SipAudioCall;
 import android.net.sip.SipException;
-import android.view.Gravity;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
-import com.example.administrator.myapplication.activity.AnswerCallActivity;
-import com.example.administrator.myapplication.activity.VoiceIncomingActivity;
 
 public class VoiceIncomingWindow extends ClassWindow implements View.OnClickListener {
     private View rootView;
     private Context context;
-    private ImageView img_listen,img_break;//接听 挂断按钮
+    private ImageView img_listen,img_break,img_hang_up;//接听 挂断按钮
+    private ConstraintLayout constraintLayout_1,constraintLayout_2;
     public  SipAudioCall sipAudioCall;
     public String username;
     private TextView tv_name;
@@ -31,13 +29,17 @@ public class VoiceIncomingWindow extends ClassWindow implements View.OnClickList
         rootView = inflater.inflate(R.layout.voice_incoming, null);
         this.setContentView(rootView);
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         initView(rootView);
 
     }
 
     //初始化控件
     private void initView(View view){
+        constraintLayout_1 = (ConstraintLayout)view.findViewById(R.id.close_receiver);
+        constraintLayout_2 = (ConstraintLayout)view.findViewById(R.id.answer_call) ;
+        img_hang_up = (ImageView)view.findViewById(R.id.hang_up_btn);
+        img_hang_up.setOnClickListener(this);
         tv_name = (TextView)view.findViewById(R.id.voice_name);
         tv_name.setText(username);
         img_break = (ImageView) view.findViewById(R.id.refuse_btn);
@@ -60,8 +62,8 @@ public class VoiceIncomingWindow extends ClassWindow implements View.OnClickList
                 } catch (SipException e) {
                     e.printStackTrace();
                 }
-                AnswerCallWindow answerCallWindow = new AnswerCallWindow(context,username,sipAudioCall);
-                answerCallWindow.showAtLocation(rootView, Gravity.CENTER,0,0);
+                constraintLayout_1.setVisibility(View.GONE);
+                constraintLayout_2.setVisibility(View.VISIBLE);
                 break;
             }
             //挂断事件
@@ -75,11 +77,17 @@ public class VoiceIncomingWindow extends ClassWindow implements View.OnClickList
                 dismiss();
                 break;
             }
+            //接听挂断事件
+            case R.id.hang_up_btn:{
+                try {
+                    sipAudioCall.endCall();
+                    sipAudioCall.close();
+                } catch (SipException e) {
+                    e.printStackTrace();
+                }
+                dismiss();
+            }
         }
     }
-    //电话接听跳转
-    public void setIntent(){
-        AnswerCallWindow answerCallWindow = new AnswerCallWindow(context,username,sipAudioCall);
-        answerCallWindow.showAtLocation(rootView, Gravity.CENTER,0,0);
-    }
+
 }

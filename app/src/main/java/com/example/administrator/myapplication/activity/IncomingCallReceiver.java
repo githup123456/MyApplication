@@ -79,13 +79,13 @@ public class IncomingCallReceiver extends BroadcastReceiver {
         if (sipAudioCall == null)
         Log.d("SipManager",""+sipAudioCall);
     }
+    public VoiceIncomingWindow voiceIncomingWindow;
     //获取sipAudioCall
     public static SipAudioCall  getSipAudioCall(){
         return sipAudioCall;
     }
     private void setIntent(Context context,String userID,SipAudioCall sipAudioCall,View view){
-        VoiceIncomingWindow voiceIncomingWindow = new VoiceIncomingWindow(context,userID,sipAudioCall);
-        Activity activity = (Activity ) context;
+        voiceIncomingWindow = new VoiceIncomingWindow(context,userID,sipAudioCall);
         voiceIncomingWindow.showAtLocation(view, Gravity.CENTER,0,0);
     }
     private Handler handler = new Handler();
@@ -103,6 +103,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            voiceIncomingWindow.dismiss();
                             Toast.makeText(context,"通话中断",Toast.LENGTH_SHORT).show();
 
                         }

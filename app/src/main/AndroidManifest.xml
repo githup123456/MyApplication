@@ -45,8 +45,6 @@
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.VerifyLoginActivity" />
         <activity android:name=".login.AccountLoginActivity" />
-        <activity android:name=".activity.SendVoicePhoneActivity" />
-        <activity android:name=".activity.AnswerCallActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SipAnswerActivity" >
             <intent-filter>
@@ -59,7 +57,6 @@
         <activity android:name=".activity.MenuActivity">
 
         </activity>
-        <activity android:name=".activity.VoiceIncomingActivity" />
 
         <receiver
             android:name=".activity.IncomingCallReceiver"
