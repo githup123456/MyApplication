@@ -27,6 +27,7 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:hint="请输入手机号"
+            android:inputType="number"
             android:gravity="center"
             android:textSize="17sp"
             android:textColor="#000000"
@@ -37,6 +38,7 @@
             android:layout_below="@+id/phone_number"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:background="@drawable/right_in"
             android:layout_centerInParent="true"
             android:layout_marginTop="37dp"/>
     </RelativeLayout>
@@ -132,7 +134,7 @@
                 android:layout_width="56.5dp"
                 android:layout_height="56.5dp"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/call_back"
+                android:src="@drawable/audio_caller"
                 android:layout_alignParentLeft="true"/>
 
             <ImageView
@@ -140,7 +142,7 @@
                 android:layout_width="56.5dp"
                 android:layout_height="56.5dp"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/call_back"
+                android:src="@drawable/vedio_call"
                 android:layout_alignParentRight="true"/>
 
         </RelativeLayout>

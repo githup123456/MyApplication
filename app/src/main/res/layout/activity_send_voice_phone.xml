@@ -22,7 +22,7 @@
         android:layout_width="101.5dp"
         android:layout_height="101.5dp"
         android:layout_marginLeft="137dp"
-        android:layout_marginTop="215dp"
+        android:layout_marginTop="200dp"
         android:layout_marginRight="137dp"
         android:src="@drawable/call_head"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,8 +89,8 @@
         android:id="@+id/answer_call"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:background="#353535"
-
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Chronometer

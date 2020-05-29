@@ -21,6 +21,7 @@ import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -32,7 +33,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -174,8 +174,8 @@ public class MainActivity extends Activity {
     public  SipAudioCall getSipcall(){
         return sipAudioCall;
     }
-
-    public static void showZhuce(Context context,SipProfile sipProfile,final String userName, final String domain, final String passWord,SipManager sipManager) {
+    public static Handler handler = new Handler();
+    public static void showZhuce(final Context context, SipProfile sipProfile, final String userName, final String domain, final String passWord, SipManager sipManager) {
         if (sipManager==null){
             sipManager = SipManager.newInstance(context);
         }
@@ -207,14 +207,26 @@ public class MainActivity extends Activity {
                 @Override
                 public void onRegistering(String localProfileUri) {
                     Log.d("SipMainActivity123", "" + userName + ";  ;" + domain + " ;  ;" + passWord);
+
                 }
                 @Override
                 public void onRegistrationDone(String localProfileUri, long expiryTime) {
                     Log.d("SipMainActivity_log+",";"+localProfileUri+"; ; ;"+expiryTime+";  ;");
+                    Intent intent_register = new Intent(context,MenuActivity.class);
+                    intent_register.putExtra("string_url",userName+"@"+domain);
+                    context.startActivity(intent_register);
+                    Toast.makeText(context,"登录成功",Toast.LENGTH_SHORT).show();
                 }
                 @Override
                 public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
                     Log.d("SipMainActivity_log=",";"+localProfileUri+"; ; ;"+errorCode+";  ;"+errorMessage);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,"登录失败",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             };
             Log.d("SipMainActivity3", ""  + ";  ;" + domain + " ;  ;" + passWord);
@@ -406,7 +418,7 @@ public class MainActivity extends Activity {
 
     public void updatePreferences() {
         Intent settingsActivity = new Intent(getBaseContext(),
-                SipAnswerActivity.class);
+                WalkieTalkieActivity.class);
         startActivity(settingsActivity);
     }
 
@@ -461,7 +473,7 @@ public class MainActivity extends Activity {
 
         Intent intent;
         if (needsEchoCalibration && echoCalibrationDone) {
-            intent = new Intent(this, SipAnswerActivity.class);
+            intent = new Intent(this, WalkieTalkieActivity.class);
             startActivity(intent);
         } else {
             /*boolean openH264 = LinphonePreferences.instance().isOpenH264CodecDownloadEnabled();

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.administrator.myapplication">
 
+    <uses-sdk android:minSdkVersion="9"/>
     <uses-permission android:name="android.permission.USE_SIP" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,16 +19,15 @@
     <uses-permission android:name="android.permission.CALL_PRIVILEGED" tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.DEVICE_POWER" tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
     <uses-feature android:name="android.hardware.sip.voip" android:required="true" />
     <uses-feature android:name="android.hardware.wifi" android:required="true" />
     <uses-feature android:name="android.hardware.microphone" android:required="true" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_sign"
+        android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_sign"
+        android:roundIcon="@drawable/ic_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".login.ResetPasswordActivity"></activity>
@@ -35,7 +35,7 @@
         <activity android:name=".login.VerifyLoginActivity" />
         <activity android:name=".login.AccountLoginActivity" />
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.SipAnswerActivity" >
+        <activity android:name=".activity.WalkieTalkieActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

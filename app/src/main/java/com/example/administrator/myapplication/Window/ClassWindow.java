@@ -5,7 +5,7 @@ import android.widget.PopupWindow;
 
 public class ClassWindow extends PopupWindow {
     public ClassWindow(Context context){
-        super(context);
+
     }
 
 

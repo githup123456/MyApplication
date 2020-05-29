@@ -1,7 +1,10 @@
 package com.example.administrator.myapplication.activity;
 
 import android.content.IntentFilter;
+import android.net.sip.SipException;
 import android.net.sip.SipManager;
+import android.net.sip.SipProfile;
+import android.net.sip.SipRegistrationListener;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +19,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.adpter.MyFragmentPagerAdapter;
@@ -50,7 +52,7 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_activity);
-        SipAnswerActivity sipAnswerActivity = new SipAnswerActivity();
+        WalkieTalkieActivity sipAnswerActivity = new WalkieTalkieActivity();
         sipManager = sipAnswerActivity.getSipManager();
         //广播
         IntentFilter intentFilter = new IntentFilter("android.SipTest.INCOMING_CALL");
@@ -93,12 +95,34 @@ public class MenuActivity extends AppCompatActivity {
         });
         showDialog(view);
     }
-
+    public SipProfile sipProfile;
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("", "黑名单服务关闭");
+        Log.d("SipMa", "黑名单服务关闭");
+        sipProfile = WalkieTalkieActivity.getSip_Profile();
+        try {
+            sipManager.unregister(sipProfile, new SipRegistrationListener() {
+                @Override
+                public void onRegistering(String s) {
+
+                }
+
+                @Override
+                public void onRegistrationDone(String s, long l) {
+
+                }
+
+                @Override
+                public void onRegistrationFailed(String s, int i, String s1) {
+
+                }
+            });
+        } catch (SipException e) {
+            e.printStackTrace();
+        }
         unregisterReceiver(mReceiver);
+        MenuActivity.this.finish();
         super.onDestroy();
     }
 

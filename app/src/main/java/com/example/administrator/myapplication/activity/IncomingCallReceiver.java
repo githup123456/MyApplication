@@ -33,13 +33,11 @@ import static com.example.administrator.myapplication.activity.MainActivity.sipM
 public class IncomingCallReceiver extends BroadcastReceiver {
     public static SipAudioCall sipAudioCall;
     public String userID;
-    public Date  firstCallTime;//点击拨打电话的时间
-    public Date  endCallTime; //结束拨打电话的时间
 
     @Override
     public void onReceive(final Context context, Intent intent) {
         SipAudioCall incomingCall = null;
-        Log.d("TAGqw", "onReceive: 1");
+        Log.d("TAGqw", "onReceive: 12");
         final MenuActivity answerActivity = (MenuActivity) context;
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.menu_activity,null);
@@ -50,7 +48,6 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                 public void onRinging(SipAudioCall call, SipProfile caller) {
                     super.onRinging(call, caller);
                     try {
-                        Log.d("TAGqw", "onReceive: 1");
                         userID = caller.getUserName();
                         call.answerCall(30);
 
@@ -74,7 +71,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                 }
             };
 
-            incomingCall = sipManager.takeAudioCall(intent, listener);
+            incomingCall = answerActivity.sipManager.takeAudioCall(intent, listener);
             setSipAudioCall(incomingCall);
             setIntent(context,userID,incomingCall,view);
             //showDialog(context,incomingCall);
@@ -93,8 +90,11 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     public static SipAudioCall  getSipAudioCall(){
         return sipAudioCall;
     }
+    private VoiceIncomingWindow voiceIncomingWindow;
+
+    // 打开接听电话Window
     private void setIntent(Context context,String userID,SipAudioCall sipAudioCall,View view){
-        VoiceIncomingWindow voiceIncomingWindow = new VoiceIncomingWindow(context,userID,sipAudioCall);
+        voiceIncomingWindow = new VoiceIncomingWindow(context,userID,sipAudioCall);
         voiceIncomingWindow.showAtLocation(view, Gravity.CENTER,0,0);
     }
 
@@ -106,7 +106,8 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 
             SipSession.Listener listener = new SipSession.Listener(){
                 @Override
-                public void onCalling(SipSession session) {
+                public void onCalling(final SipSession session) {
+                    Logger.getLogger("onCalling");
                 }
                 @Override
                 public void onCallEnded(final SipSession session) {
@@ -114,6 +115,9 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d("TAGqw", "run: ");
+                            voiceIncomingWindow.call_time.stop();//通话中断  关闭 计时器
+                            voiceIncomingWindow.dismiss(); //通话中断  关闭 WIndow
                             Toast.makeText(context,"通话中断",Toast.LENGTH_SHORT).show();
                         }
                     });

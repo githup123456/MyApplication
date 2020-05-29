@@ -1,100 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light">
+    tools:context=".login.RegisterActivity">
 
-    <LinearLayout
-        android:id="@+id/ll1"
+    <ImageView
+        android:id="@+id/register_mistake_btn"
+        android:layout_width="12.5dp"
+        android:layout_height="12.5dp"
+        android:layout_marginTop="38.5dp"
+        android:layout_marginLeft="17.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/register_account"
+        android:text="登录账号"
+        android:textSize="23sp"
+        android:textColor="#141E28"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:layout_marginLeft="27dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_mistake_btn"/>
+
+    <TextView
+        android:id="@+id/register_auto_login"
+        android:text="新用户登陆后将自动创建账号"
+        android:textSize="15sp"
+        android:textColor="#141E28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.5dp"
+        android:layout_marginLeft="27dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_account"/>
+
+
+    <EditText
+        android:id="@+id/sip_ed_username"
+        android:hint="请输入用户名"
+        android:background="@null"
+        android:layout_marginTop="38dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="100dp"
-        android:orientation="horizontal">
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="16.5dp"
+        app:layout_constraintTop_toBottomOf="@id/register_auto_login"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="username :"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
+    <View
+        android:id="@+id/register_phone"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#EDEDED"
+        android:layout_marginLeft="16.5dp"
+        android:layout_marginRight="16.5dp"
+        android:layout_marginTop="13.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sip_ed_username"/>
 
-        <EditText
-            android:id="@+id/sip_ed_username"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="037156156101" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll2"
+    <EditText
+        android:id="@+id/sip_ed_password"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:background="@null"
+        android:layout_marginTop="22.5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll1"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="100dp"
-        android:orientation="horizontal">
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="16.5dp"
+        app:layout_constraintTop_toBottomOf="@id/register_phone"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text=" password :"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/sip_ed_password"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:password="true"
-            android:text="123654" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll3"
+    <View
+        android:id="@+id/view_register_password"
         android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#EDEDED"
+        android:layout_marginLeft="16.5dp"
+        android:layout_marginRight="16.5dp"
+        android:layout_marginTop="13.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sip_ed_password"/>
+
+    <EditText
+        android:id="@+id/sip_ed_domain"
+        android:hint="请输入Ip地址"
+        android:background="@null"
+        android:text="121.196.12.146"
+        android:visibility="gone"
+        android:layout_marginTop="22.5dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll2"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="100dp"
-        android:orientation="horizontal">
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="16.5dp"
+        app:layout_constraintTop_toBottomOf="@id/view_register_password"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="   domain   :"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
+    <View
+        android:id="@+id/view_code"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#EDEDED"
+        android:layout_marginLeft="16.5dp"
+        android:layout_marginRight="16.5dp"
+        android:layout_marginTop="14.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sip_ed_domain"/>
 
-        <EditText
-            android:id="@+id/sip_ed_domain"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="192.168.1.210" />
-    </LinearLayout>
 
     <Button
         android:id="@+id/sip_btnn_login"
-        android:layout_width="133dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/login_border"
+        android:text="登录"
+        android:layout_marginRight="36dp"
+        android:layout_marginLeft="36dp"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/view_code"
+        tools:layout_editor_absoluteX="31dp" />
+
+    <TextView
+        android:id="@+id/agree_register"
+        android:textColor="#87878C"
+        android:textSize="12sp"
+        android:text="注册代表您已阅读并同意"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:layout_below="@+id/ll3"
-        android:background="@drawable/btn_login_shape"
-        android:text="注册"
-        android:textColor="@android:color/black"
-        android:textSize="25dp" />
+        android:layout_marginBottom="48.5dp"
+        android:layout_marginLeft="49.5dp"
+        android:layout_marginRight="43.5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/user_deal"
+        android:text="《用户协议》"
+        android:textColor="#2DB7CA"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/agree_register"
+        app:layout_constraintTop_toTopOf="@id/agree_register"/>
 
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/user_and"
+        android:text="和"
+        android:textColor="#87878C"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/user_deal"
+        app:layout_constraintTop_toTopOf="@id/user_deal"/>
+
+
+    <TextView
+        android:id="@+id/privacy_deal"
+        android:text="《隐私协议》"
+        android:textColor="#2DB7CA"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/user_and"
+        app:layout_constraintTop_toTopOf="@id/user_and"/>
+</android.support.constraint.ConstraintLayout>

@@ -71,10 +71,11 @@ public class CommunicateFragment extends Fragment {
         img_call_audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phone_number = ed_ph_number.getText().toString();
+                String number = ed_ph_number.getText().toString();
+                String phone_number = ed_ph_number.getText().toString()+"@192.168.1.210";
                 Intent intent2 = getActivity().getIntent();
                 String url = intent2.getStringExtra("string_url");
-                SendVoicePhoneWindow sendVoicePhoneWindow = new SendVoicePhoneWindow(getActivity(),url,phone_number);
+                SendVoicePhoneWindow sendVoicePhoneWindow = new SendVoicePhoneWindow(getActivity(),url,phone_number,number);
                 sendVoicePhoneWindow.showAtLocation(img_call_audio, Gravity.CENTER,0,0);
             }
         });
