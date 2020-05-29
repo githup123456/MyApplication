@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.AccountLoginActivity">
+
+    <ImageView
+        android:id="@+id/account_mistake_btn"
+        android:layout_width="12.5dp"
+        android:layout_height="12.5dp"
+        android:src="@drawable/add"
+        android:layout_marginTop="38.5dp"
+        android:layout_marginLeft="17.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/account_login_text"
+        android:text="账号登录"
+        android:textSize="23sp"
+        android:textColor="#141E28"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:layout_marginLeft="27dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_mistake_btn"/>
+
+    <TextView
+        android:id="@+id/new_user_auto_login"
+        android:text="新用户登陆后将自动创建账号"
+        android:textSize="15sp"
+        android:textColor="#141E28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.5dp"
+        android:layout_marginLeft="27dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_login_text"/>
+    
+    
+    <EditText
+        android:id="@+id/edit_phone"
+        android:hint="请输入手机号"
+        android:background="@null"
+        android:layout_marginTop="38dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="16.5dp"
+        app:layout_constraintTop_toBottomOf="@id/new_user_auto_login"/>
+    
+    <View
+        android:id="@+id/view_phone"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#EDEDED"
+        android:layout_marginLeft="16.5dp"
+        android:layout_marginRight="16.5dp"
+        android:layout_marginTop="13.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_phone"/>
+
+    <EditText
+        android:id="@+id/edit_login_password"
+        android:hint="请输入登录密码"
+        android:background="@null"
+        android:layout_marginTop="22.5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="16.5dp"
+        android:drawableRight="@drawable/add"
+        app:layout_constraintTop_toBottomOf="@id/view_phone"/>
+
+    <ImageView
+        android:id="@+id/account_hide"
+        android:textSize="14sp"
+        android:textColor="#C6C6C6"
+        android:text="获取验证码"
+        android:layout_width="17dp"
+        android:layout_height="7.5dp"
+        android:layout_marginRight="18dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_login_password"/>
+
+    <View
+        android:id="@+id/view_password"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#EDEDED"
+        android:layout_marginLeft="16.5dp"
+        android:layout_marginRight="16.5dp"
+        android:layout_marginTop="14.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_login_password"/>
+
+    <TextView
+        android:id="@+id/forget_password"
+        android:text="忘记密码?"
+        android:textColor="#22D49E"
+        android:textSize="11sp"
+        android:layout_marginTop="15.5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/account_login_text"
+        app:layout_constraintTop_toBottomOf="@id/view_password"/>
+
+
+    <TextView
+        android:id="@+id/verify_login"
+        android:text="验证码登录"
+        android:textColor="#22D49E"
+        android:textSize="11sp"
+        android:layout_marginTop="15.5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="@id/view_password"
+        app:layout_constraintTop_toBottomOf="@id/view_password"/>
+
+
+    <Button
+        android:id="@+id/account_login_btn"
+        android:text="登录"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/login_border"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="38dp"
+        app:layout_constraintTop_toBottomOf="@id/forget_password"/>
+</android.support.constraint.ConstraintLayout>
